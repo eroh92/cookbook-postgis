@@ -1,5 +1,8 @@
+include_recipe "apt"
+
 # add new apt source list for new repositories (this is a workaround due the bug when updating apt after using apt_repository on chef 10.10)
 template "/etc/apt/sources.list.d/postgis2-sources.list" do
+  mode 644
   notifies :run, resources(:execute => "apt-get update"), :immediately
 end
 
